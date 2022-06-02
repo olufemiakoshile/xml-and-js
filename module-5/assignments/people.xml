@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="people.json"?>
+<root>
+   <element>
+      <email>hzeale0@odnoklassniki.ru</email>
+      <first_name>Husain</first_name>
+      <gender>Male</gender>
+      <id>1</id>
+      <ip_address>143.237.191.245</ip_address>
+      <last_name>Zeale</last_name>
+   </element>
+   <element>
+      <email>mdelgado1@paginegialle.it</email>
+      <first_name>Michale</first_name>
+      <gender>Male</gender>
+      <id>2</id>
+      <ip_address>144.2.126.19</ip_address>
+      <last_name>Delgado</last_name>
+   </element>
+   </root>
