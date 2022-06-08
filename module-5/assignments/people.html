@@ -1,110 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="people.css">
-        <title>People</title>
-    </head>
-<body>
-<table cellspacing="1" border = "1">
-	<grp width="150"></grp>
-	<grp width="150"></grp>
-	<grp width="150"></grp>
-	<grp width="150"></grp>
-	<grp width="150"></grp>
-	<grp width="150"></grp>
-	<tr>
-		<td height="20" align="left">id</td>
-		<td align="left">first_name</td>
-		<td align="left">last_name</td>
-		<td align="left">email</td>
-		<td align="left">gender</td>
-		<td align="left">ip_address</td>
-	</tr>
-	<tr>
-		<td height="20" align="right" sdval="1" sdnum="1033;">1</td>
-		<td align="left">Husain</td>
-		<td align="left">Zeale</td>
-		<td align="left">hzeale0@odnoklassniki.ru</td>
-		<td align="left">Male</td>
-		<td align="left">143.237.191.245</td>
-	</tr>
-	<tr>
-		<td height="20" align="right" sdval="2" sdnum="1033;">2</td>
-		<td align="left">Michale</td>
-		<td align="left">Delgado</td>
-		<td align="left">mdelgado1@paginegialle.it</td>
-		<td align="left">Male</td>
-		<td align="left">144.2.126.19</td>
-	</tr>
-	<tr>
-		<td height="20" align="right" sdval="3" sdnum="1033;">3</td>
-		<td align="left">Gaspard</td>
-		<td align="left">Upwood</td>
-		<td align="left">gupwood2@fastcompany.com</td>
-		<td align="left">Male</td>
-		<td align="left">147.85.27.165</td>
-	</tr>
-	<tr>
-		<td height="20" align="right" sdval="4" sdnum="1033;">4</td>
-		<td align="left">Gussy</td>
-		<td align="left">Dowzell</td>
-		<td align="left">gdowzell3@ox.ac.uk</td>
-		<td align="left">Male</td>
-		<td align="left">22.201.167.239</td>
-	</tr>
-	<tr>
-		<td height="20" align="right" sdval="5" sdnum="1033;">5</td>
-		<td align="left">Alida</td>
-		<td align="left">Macias</td>
-		<td align="left">amacias4@slate.com</td>
-		<td align="left">Female</td>
-		<td align="left">166.62.41.24</td>
-	</tr>
-	<tr>
-		<td height="20" align="right" sdval="6" sdnum="1033;">6</td>
-		<td align="left">Tess</td>
-		<td align="left">Sainte Paul</td>
-		<td align="left">tsaintepaul5@xinhuanet.com</td>
-		<td align="left">Female</td>
-		<td align="left">58.80.74.111</td>
-	</tr>
-	<tr>
-		<td height="20" align="right" sdval="7" sdnum="1033;">7</td>
-		<td align="left">Germaine</td>
-		<td align="left">Winnett</td>
-		<td align="left">gwinnett6@parallels.com</td>
-		<td align="left">Genderqueer</td>
-		<td align="left">224.15.42.167</td>
-	</tr>
-	<tr>
-		<td height="20" align="right" sdval="8" sdnum="1033;">8</td>
-		<td align="left">Mei</td>
-		<td align="left">Swansbury</td>
-		<td align="left">mswansbury7@uol.com.br</td>
-		<td align="left">Female</td>
-		<td align="left">191.235.203.177</td>
-	</tr>
-	<tr>
-		<td height="20" align="right" sdval="9" sdnum="1033;">9</td>
-		<td align="left">Brietta</td>
-		<td align="left">Greenfield</td>
-		<td align="left">bgreenfield8@qq.com</td>
-		<td align="left">Male</td>
-		<td align="left">72.108.253.70</td>
-	</tr>
-	<tr>
-		<td height="20" align="right" sdval="10" sdnum="1033;">10</td>
-		<td align="left">Guinna</td>
-		<td align="left">Dagnan</td>
-		<td align="left">gdagnan9@thetimes.co.uk</td>
-		<td align="left">Female</td>
-		<td align="left">108.233.202.64</td>
-	</tr>
-</table>
+<html>
+  <body>
+    <style>
+        table, th, td {
+            border : 1px solid black;
+            border-collapse : collapse; 
+        }
 
+        th,td {
+            padding: 5px;
+        }
+    </style>
+<button type="button" onclick="loadXMLDoc()">Get my persons Catalog</button>
+<br><br>
+<table id="people"></table>
+    <script>
+      function loadXMLDoc(){
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          myFunction(this);
+        }
+    }
+      };
+      xhttp.open("GET", "people.xml", true);
+      xhttp.send();
+
+      function myfunction(xml) {
+          var i;
+        var xmlDoc = xml.responseXML;
+        var table="<tr><th>First_name</th><th>last_name</th></tr>";
+        var x = xmlDoc.getElementsByTagName("persons");
+  for (i = 0; i <x.length; i++) {
+    table += "<tr><td>" +
+    x[i].getElementsByTagName("first_name")[0].childNodes[0].nodeValue +
+    "</td><td>" +
+    x[i].getElementsByTagName("last_name")[0].childNodes[0].nodeValue +
+    "</td></tr>";
+  }
+  document.getElementById("persons").innerHTML = table;
+}
+</script>
 </body>
-
 </html>
