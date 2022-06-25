@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universities</title>
+    <style>
+        /* Styles for the Container and Table */
+        #container{
+            display:grid;
+            grid-template-columns: auto auto auto;
+            gap:2rem;
+        }
+
+        #container .column{
+            padding:1rem;
+            border:1px solid #ccc;
+            border-radius: 5px;
+            background-color:#ddd;
+        }
+
+        #container .column table{
+            border-collapse: collapse;
+            width:100%;
+        }
+
+        th,td{
+            border:1px solid #ccc;
+            background-color:#fff;
+            padding:.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Container where the columns will be appended -->
+    <div id="container">
+    </div>
+
+    <script>
+        let html = ""
+        // Fetch XML File
+        fetch("data.xml").then((response)=>{
+            response.text().then((xml)=>{
+                // Instantiate string to xml parser
+                let parser = new DOMParser()
+                // Parse String to XML
+                let xmlDom = parser.parseFromString(xml,'application/xml')
+                // Select all row tag elements
+                let row = xmlDom.querySelectorAll('row')
+
+                // Populate each row 
+                row.forEach(uni =>{
+                    var obj = uni.children
+
+                    // Get the name and the address of each row
+                    html+='<div class="column">'
+                    html+='<h3>'+obj[0].innerHTML+'</h3>'
+                    html+='<hr>'
+                    html+='<p>'+obj[1].children[0].innerHTML+
+                        ', '+obj[1].children[1].innerHTML+
+                        ', '+obj[1].children[2].innerHTML+
+                        ', '+obj[1].children[3].innerHTML+
+                        ', '+obj[1].children[4].innerHTML+'</p>'
+                    html+='<h4>Courses</h4>'
+
+                    // Get all the address and concatenate it to the previous result
+                    html+='<table>'
+                        html+='<tr><th>ID</th><th>Title</th><th>Description</th></tr>'
+                        // Select all courses
+                        let courses = uni.querySelectorAll("courses")
+                        courses.forEach(course =>{
+                            html+='<tr>'
+                                html+='<td>'+course.children[0].innerHTML+'</td>'
+                                html+='<td>'+course.children[1].innerHTML+'</td>'
+                                html+='<td>'+course.children[2].innerHTML+'</td>'
+                            html+='</tr>'
+                        })
+                    html+='</table>'
+
+                    // Get all the students and concatenate it to the previous result
+                    html+='<h4>Students</h4>'
+                    html+='<table>'
+                        html+='<tr><th>ID</th><th>Name</th><th>Birthday</th><th>Email</th></tr>'
+                        
+                        // Select all students
+                        let students = uni.querySelectorAll("students")
+                        students.forEach(student =>{
+                            html+='<tr>'
+                                html+='<td>'+student.children[0].innerHTML+'</td>'
+                                html+='<td>'+student.children[2].innerHTML+', '+student.children[1].innerHTML+'</td>'
+                                html+='<td>'+student.children[3].innerHTML+'</td>'
+                                html+='<td>'+student.children[4].innerHTML+'</td>'
+                            html+='</tr>'
+                        })
+                    html+='</table>'
+
+                    // Get all the faculty and concatenate it to the previous result
+                    html+='<h4>Faculties</h4>'
+                    html+='<table>'
+                        html+='<tr><th>ID</th><th>Name</th><th>Email</th><th>Phone Number</th></tr>'
+                        
+                        // Select all faculty
+                        let faculties = uni.querySelectorAll("faculty")
+                        faculties.forEach(faculty =>{
+                            html+='<tr>'
+                                html+='<td>'+faculty.children[0].innerHTML+'</td>'
+                                html+='<td>'+faculty.children[2].innerHTML+', '+faculty.children[1].innerHTML+'</td>'
+                                html+='<td>'+faculty.children[3].innerHTML+'</td>'
+                                html+='<td>'+faculty.children[4].innerHTML+'</td>'
+                            html+='</tr>'
+                        })
+                    html+='</table>'
+                    html+='</div>'
+                })
+// Display the output
+                document.getElementById("container").innerHTML = html
+                
+                
+            })
+        })
+
+    </script>
+</body>
+</html>

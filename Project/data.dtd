@@ -1,0 +1,19 @@
+<!ELEMENT address ( #PCDATA | address | city | country | region | zipCode )* >
+<!ELEMENT city ( #PCDATA ) >
+<!ELEMENT country ( #PCDATA ) >
+<!ELEMENT courses ( id, title, description ) >
+<!ELEMENT description ( #PCDATA ) >
+<!ELEMENT dob ( #PCDATA ) >
+<!ELEMENT email ( #PCDATA ) >
+<!ELEMENT faculty ( id, firstName, lastName, email, phoneNumber ) >
+<!ELEMENT firstName ( #PCDATA ) >
+<!ELEMENT id ( #PCDATA ) >
+<!ELEMENT lastName ( #PCDATA ) >
+<!ELEMENT name ( #PCDATA ) >
+<!ELEMENT phoneNumber ( #PCDATA ) >
+<!ELEMENT region ( #PCDATA ) >
+<!ELEMENT root ( row+ ) >
+<!ELEMENT row ( name, address, courses+, students+, faculty+ ) >
+<!ELEMENT students ( id, firstName, lastName, dob, email ) >
+<!ELEMENT title ( #PCDATA ) >
+<!ELEMENT zipCode ( #PCDATA ) >
