@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table {
+            margin-top: 70px;
+            margin-left: 70px;
+            border: solid black;
+        }
+        th, td {
+            border: solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="customers">
+        <tr>
+            <th>Customer ID</th>
+            <th>Title</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Order ID</th>
+            <th>Order By</th>
+            <th>Order Date</th>
+            <th>Item Price</th>
+            <th>Item Quantity</th>
+        </tr>
+
+    </table>
+    <script>
+       const xhr = (url, method = "GET") => {
+        return new Promise((resolve, reject) => {
+          const xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+              resolve(this.responseXML);
+            }
+          };
+          xhttp.open(method, url, true);
+          xhttp.send();
+        });
+      };
+        function displayData(xmlDoc) {
+            const le = document.getElementById(`customers`);
+            const Nodes = xmlDoc.getElementsByTagName(`customer`);
+            for (let i = 0; i < Nodes.length; i++) {
+                const Node = Nodes[i];
+                const template = document.createElement(`template`);
+                html = `<tr>
+                        <td>${Node.getAttribute(`custID`)}</td>
+                        <td>${Node.getElementsByTagName(`name`)[0].getAttribute(`title`)}</td>
+                        <td>${blank(Node.getElementsByTagName(`name`)[0])}</td>
+                        <td>${blank(Node.getElementsByTagName(`address`)[0])}</td>
+                        <td>${blank(Node.getElementsByTagName(`phone`)[0])}</td>
+                        <td>${blank(Node.getElementsByTagName(`email`)[0])}</td>
+                        <td>${Node.getElementsByTagName(`order`)[0].getAttribute(`orderID`)}</td>
+                        <td>${Node.getElementsByTagName(`order`)[0].getAttribute(`orderBy`)}</td>
+                        <td>${blank(Node.getElementsByTagName(`orderDate`)[0])}</td>
+                        <td>${blank(Node.getElementsByTagName(`itemPrice`)[0])}</td>
+                        <td>${blank(Node.getElementsByTagName(`itemQty`)[0])}</td>
+                    </tr>`
+                html = html.trim();
+                template.innerHTML = html;
+                le.appendChild(template.content.firstChild);
+            }
+        }
+
+        function blank(node) {
+            if (!node) {
+                return " ";
+            }
+            else {
+                return node.childNodes[0].nodeValue;
+            }
+        }
+        loadData = async () => {
+        const response = await fetch("customers.xml");
+        const str = await response.text();
+        const xmlData = new DOMParser().parseFromString(str, "text/xml");
+        displayData(xmlData);
+      };
+
+      loadData();
+    </script>
+</body>
+
+</html>  
