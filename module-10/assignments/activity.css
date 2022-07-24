@@ -1,0 +1,28 @@
+*{
+  font-family: Impact, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+.genre-card {
+  max-width: 100%;
+  overflow: hidden;
+  display: flex;
+  background-color: #1cd3b1;
+  color: white;
+}
+
+.genre-card:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.genre-card > div {
+  padding: 30px 30px;
+  overflow: hidden;
+}
+
+ol {
+  margin: 10;
+  padding: 10;
+  display: grid;
+  grid-template-columns: repeat(5, 200px);
+  grid-row-gap: 10px;
+  max-width: 100%;
+}
