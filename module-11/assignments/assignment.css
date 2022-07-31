@@ -1,0 +1,48 @@
+form {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 30px;
+  }
+body{
+    background-color: #91c2f0;
+}
+
+.genre-icon {
+    display: flex;
+    padding-left: 30px;
+  }
+  
+  h3 {
+    color: black;
+  }
+.genre-card {
+    background-size: cover;
+    background-color: #223b52;
+  }
+  
+  .genre-card:not(:last-child) {
+    margin-bottom: 10px;
+  }
+  
+  .genre-card > div {
+    padding: 10px 20px;
+    display: flex;
+    overflow: hidden;
+  }
+
+  ol {
+    list-style: none;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    padding: 10px;
+    margin: 10px;
+    background-color: #91c2f0;
+  }
+  
+
